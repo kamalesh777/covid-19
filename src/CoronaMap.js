@@ -2,39 +2,32 @@ import React, { useState, useEffect } from "react";
 import { HeatMap } from "@ant-design/maps";
 import countryData from "./geoData/countriesData.json";
 
-const DemoHeatMap = ({ covidData }) => {
-  const [data, setData] = useState({ type: "FeatureCollection", features: [] });
+const DemoHeatMap = React.memo(({ covidData }) => {
 
   const { country_codes } = countryData;
-  // console.log(country_codes[3].country);
 
-  useEffect(() => {
-    country_codes.map(
-      (item) =>
-        covidData &&
-        covidData
-          .filter((a) => a.country === item.country)
-          .map((x) =>
-            setData(() =>
-              Object.assign(x, {
-                properties: {
-                  id: "ak16994519",
-                  mag: 1.7,
-                  time: 1507425289659,
-                  felt: null,
-                  tsunami: 0,
-                },
-                lat: item.latitude,
-                lng: item.longitude,
-                t: item.numeric,
-                n: item.country,
-              })
-            )
-          )
-    );
-  });
+  const objArray = [];
 
-  console.log(data);
+  country_codes.map(
+    (item) =>
+      covidData &&
+      covidData
+        .filter((a) => a.country === item.country)
+        .map((x) => 
+          objArray.push({
+            ...x,
+            properties: {
+              cases: x.cases
+            },
+            lat: item.latitude,
+            lng: item.longitude,
+            t: item.numeric,
+            n: item.country,
+          })
+        )
+  );
+
+  console.log(objArray);
 
   const config = {
     map: {
@@ -45,27 +38,12 @@ const DemoHeatMap = ({ covidData }) => {
       pitch: 0,
     },
     source: {
-      data: [
-        {
-          lng: 77,
-          lat: 22,
-          t: 360,
-          n: "India",
-          properties: {
-            id: "ak16994519",
-            mag: 1.7,
-            time: 1507425289659,
-            felt: null,
-            tsunami: 0,
-          },
-        },
-        { lng: -64, lat: -34, t: 32, n: "Argentina" },
-      ],
+      data: objArray,
       parser: { type: "json", x: "lng", y: "lat" },
     },
     size: {
-      field: "t",
-      value: [0, 10],
+      field: "cases",
+      value: [0, 100],
     },
     style: {
       intensity: 2,
@@ -107,6 +85,6 @@ const DemoHeatMap = ({ covidData }) => {
   };
 
   return <HeatMap {...config} />;
-};
+});
 
 export default DemoHeatMap;
