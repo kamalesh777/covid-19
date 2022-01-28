@@ -45,128 +45,128 @@ const Dashboard = props => {
 	// console.log(countryWiseData);
 
 	return (
-		<Layout>
-			<div className="container" style={{ margin: "80px auto" }}>
-				<Row>
-					{loading && (
-						<Col lg={10} className="gutter-row">
-							<Spin size="large" />
-						</Col>
-					)}
-					{!loading && (
-						<Col lg={12} className="gutter-row">
-							<h1 className="heading">Covid 19 Tracker</h1>
-							<Select
-								defaultValue="world"
-								style={{ width: "100%", margin: "15px 0" }}
-								size="large"
-								onChange={handleChange}
-							>
-								{countries &&
-									countries.map(c => (
-										<option value={c} key={c}>
-											{c}
-										</option>
-									))}
-							</Select>
+    <Layout>
+      <div className="container" style={{ margin: "80px auto" }}>
+        <Row>
+          {loading && (
+            <Col lg={10} className="gutter-row">
+              <Spin size="large" />
+            </Col>
+          )}
+          {!loading && (
+            <Col lg={12} className="gutter-row">
+              <h1 className="heading">Covid 19 Tracker</h1>
+              <Select
+                defaultValue="world"
+                style={{ width: "100%", margin: "15px 0" }}
+                size="large"
+                onChange={handleChange}
+              >
+                {countries &&
+                  countries.map((c) => (
+                    <option value={c} key={c}>
+                      {c}
+                    </option>
+                  ))}
+              </Select>
 
-							<Row gutter={16}>
-								{countryWiseData && (
-									<>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-1">
-															<FaUsers />
-														</div>
-													}
-													title="Cases"
-													description={countryWiseData.cases}
-												/>
-											</Card>
-										</Col>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-2">
-															<FaProcedures />
-														</div>
-													}
-													title="Active"
-													description={countryWiseData.active}
-												/>
-											</Card>
-										</Col>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-4">
-															<FaChild />
-														</div>
-													}
-													title="Recovered"
-													description={countryWiseData.recovered}
-												/>
-											</Card>
-										</Col>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-6">
-															<FaProcedures />
-														</div>
-													}
-													title="Death"
-													description={countryWiseData.deaths}
-												/>
-											</Card>
-										</Col>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-5">
-															<FaPray />
-														</div>
-													}
-													title="Critical"
-													description={countryWiseData.critical}
-												/>
-											</Card>
-										</Col>
-										<Col md={12}>
-											<Card bordered={false} className="mb-4">
-												<Meta
-													avatar={
-														<div className="icon gradient-12">
-															<FaSadTear />
-														</div>
-													}
-													title="Death Today"
-													description={countryWiseData.todayDeaths}
-												/>
-											</Card>
-										</Col>
-									</>
-								)}
-							</Row>
-						</Col>
-					)}
-					<Col lg={12} className="gutter-row">
-						<Card>
-							<div id="mapContainer">
-								<CoronaHitMap />
-							</div>
-						</Card>
-					</Col>
-				</Row>
-			</div>
-		</Layout>
-	);
+              <Row gutter={16}>
+                {countryWiseData && (
+                  <>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-1">
+                              <FaUsers />
+                            </div>
+                          }
+                          title="Cases"
+                          description={countryWiseData.cases}
+                        />
+                      </Card>
+                    </Col>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-2">
+                              <FaProcedures />
+                            </div>
+                          }
+                          title="Active"
+                          description={countryWiseData.active}
+                        />
+                      </Card>
+                    </Col>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-4">
+                              <FaChild />
+                            </div>
+                          }
+                          title="Recovered"
+                          description={countryWiseData.recovered}
+                        />
+                      </Card>
+                    </Col>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-6">
+                              <FaProcedures />
+                            </div>
+                          }
+                          title="Death"
+                          description={countryWiseData.deaths}
+                        />
+                      </Card>
+                    </Col>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-5">
+                              <FaPray />
+                            </div>
+                          }
+                          title="Critical"
+                          description={countryWiseData.critical}
+                        />
+                      </Card>
+                    </Col>
+                    <Col md={12}>
+                      <Card bordered={false} className="mb-4">
+                        <Meta
+                          avatar={
+                            <div className="icon gradient-12">
+                              <FaSadTear />
+                            </div>
+                          }
+                          title="Death Today"
+                          description={countryWiseData.todayDeaths}
+                        />
+                      </Card>
+                    </Col>
+                  </>
+                )}
+              </Row>
+            </Col>
+          )}
+          <Col lg={12} className="gutter-row">
+            <Card>
+              <div id="mapContainer">
+                <CoronaHitMap covidData={covidData} />
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    </Layout>
+  );
 };
 
 export default Dashboard;
