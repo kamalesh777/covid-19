@@ -32,15 +32,13 @@ const DemoHeatMap = () => {
     map: {
       type: 'mapbox',
       style: 'light',
-      zoom: 11.7,
-      center: [93.855316602000158, 7.214178778000104],
+      zoom: 6.8,
+      center: [78.3, 22],
       pitch: 0,
     },
     source: {
-      data: data,
-      parser: {
-        type: 'geojson',
-      },
+      data: [{ lng: 77, lat: 22, t: 356, n: 'India' }],
+      parser: { type: 'json', x: 'lng', y: 'lat' },
     },
     size: {
       field: 'count',
