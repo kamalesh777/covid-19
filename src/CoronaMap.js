@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HeatMap } from "@ant-design/maps";
 import countryData from "./geoData/countriesData.json";
 
@@ -27,9 +27,11 @@ const DemoHeatMap = React.memo(({ covidData }) => {
         )
   );
 
-  console.log(objArray);
+  const containerWidth = document.querySelector(".ant-col").innerWidth;
+  console.log(containerWidth);
 
   const config = {
+    width: "inherit",
     map: {
       type: "mapbox",
       style: "light",
@@ -43,7 +45,7 @@ const DemoHeatMap = React.memo(({ covidData }) => {
     },
     size: {
       field: "cases",
-      value: [0, 100],
+      value: [0, 400],
     },
     style: {
       intensity: 2,
@@ -79,9 +81,7 @@ const DemoHeatMap = React.memo(({ covidData }) => {
     zoom: {
       position: "bottomright",
     },
-    legend: {
-      position: "bottomleft",
-    },
+    legend: false,
   };
 
   return <HeatMap {...config} />;
