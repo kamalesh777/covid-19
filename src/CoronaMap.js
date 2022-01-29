@@ -27,8 +27,6 @@ const DemoHeatMap = React.memo(({ covidData }) => {
         )
   );
 
-  const containerWidth = document.querySelector(".ant-col").innerWidth;
-  console.log(containerWidth);
 
   const config = {
     width: "inherit",
