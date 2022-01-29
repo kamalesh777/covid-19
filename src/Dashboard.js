@@ -66,9 +66,9 @@ const Dashboard = (props) => {
               >
                 {countries &&
                   countries.map((c) => (
-                    <option value={c} key={c}>
+                    <Select.Option value={c} key={c}>
                       {c}
-                    </option>
+                    </Select.Option>
                   ))}
               </Select>
 
